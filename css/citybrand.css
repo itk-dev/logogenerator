@@ -1,0 +1,28 @@
+div.brand-generator {
+    width: 700px;
+    background: white;
+    border: none;
+    
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+}
+
+div.brand-generator div.title {
+    display: none;
+}
+
+textarea {
+    width: 593px;
+    height: 110px;
+}
+
+#canvasArea {
+    width: 600px;
+    height: 500px;
+    padding-bottom: 0px;
+}
+
+div.colourtype {
+    min-height: 4.5em
+}
