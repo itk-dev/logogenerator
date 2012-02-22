@@ -7,31 +7,389 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title></title>
+	<title>Citybrand Logogenerator</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
-
 	<meta name="viewport" content="width=device-width">
-
-	<link rel="stylesheet" href="css/style.css">
-
-	<script src="js/libs/modernizr-2.5.3.min.js"></script>
+  <link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+  <link rel="stylesheet" type="text/css" href="css/web.css" />
+  <link rel="stylesheet" type="text/css" href="css/citybrand.css" />
+	<script src="js/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
 <header>
 
 </header>
 <div role="main">
-
+  <div class="brand-generator">
+    <div class="title"><h1>Aarhus-O-Matic</h1>- Giv din by et slogan som betyder noget for <em>dig</em></div>
+      <div class="step">
+        <div class="description">
+          <div class="stepnumber">1</div>
+          Skriv dit slogan
+        </div>
+        <div class="changeable-value">
+          <textarea id="inputText" rows="5" cols="10"></textarea>
+          <div class="invisible">
+          <input type="checkbox" id="drawProgress" checked="checked"/>
+          <label for="drawProgress">Vis "Danish for progress"</label>
+          <br />
+          <input type="checkbox" id="lockProgress" checked="checked"/>
+          <label for="lockProgress">L&aring;s "Danish for progress"</label>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="description"><div class="stepnumber">2</div>
+      Plac&eacute;r teksten
+    </div>
+    <div class="changeable-value">
+      <canvas id="canvasArea" width="700" height="500"></canvas>
+    </div>
+  </div>
+    <div class="step">
+      <div class="description">
+        <div class="stepnumber">3</div>
+        V&aelig;lg farverne
+      </div>
+      <div class="changeable-value">
+        <div class="color-selector">
+          <div class="colourtype">
+            <div class="name">
+              <img alt="error message" class="error bgToSpecial bgToText" src="images/notification_icon.png">
+              Baggrund
+            </div>
+            <div id="backgroundColor" class="colorSelector">
+              <div>
+              </div>
+            </div>
+          </div>
+          <div class="colourtype">
+            <div class="name">
+              <img alt="error message" class="error specialToText bgToText" src="images/notification_icon.png">
+              Tekst
+            </div>
+            <div id="textColor" class="colorSelector">
+              <div>
+              </div>
+            </div>
+          </div>
+          <div class="colourtype">
+            <div class="name">
+              <img alt="error message" class="error specialToText bgToSpecial" src="images/notification_icon.png">
+              Specialfarve
+            </div>
+            <div id="specialColor" class="colorSelector">
+              <div>
+              </div>
+            </div>
+          </div>
+          <div class="colourtype">
+            <div class="name">
+              Tilf&aelig;ldig
+            </div>
+            <input type="image" alt="random color" src="images/random_icon.png" onClick="jQuery('#canvasArea').stop().fadeTo(0, 0.001); findRandomColors(); jQuery('#canvasArea').fadeTo('fast',1); return false;" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="description">
+        <div class="stepnumber">
+          4
+        </div>
+        Gem og del med dine venner!
+      </div>
+      <div class="changeable-value">
+        <input type="button" value="Create PNG" onClick="createImage()"/>
+      </div>
+      <div id="result-image">
+      </div>
+    </div>
+    <div style="clear:both;">
+    </div>
+  </div>
+  
 </div>
 <footer>
 
 </footer>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery-1.6.4.min.js"><\/script>')</script>
+<script type="text/javascript" src="/js/colorpicker.js"></script>
+<script type="text/javascript" src="/js/color-lib.js"></script>
+<script type="text/javascript" src="/js/Colors.js"></script>
+<script type="text/javascript" src="/js/citybrand.js"></script>
+<script type="text/javascript" src="http://fast.fonts.com/jsapi/8c591361-8b49-4c83-9f94-6b238be497c5.js"></script>
 
-<script src="js/plugins.js"></script>
-<script src="js/script.js"></script>
+
+<script type="text/javascript">
+  jQuery(function() {
+      var urlParameters = getUrlVars();
+      
+      var scaled = false;
+      
+      if(urlParameters["crazy"]) {
+          citybrand.progressSlogan = "Doughnut for president!";
+      }
+      
+      if(urlParameters["width"]) {
+          var aspect = 1.4;
+          var nWidth = urlParameters["width"];
+          
+          var canvas = jQuery("#canvasArea");
+          canvas.attr("width", nWidth);
+          canvas.attr("height", nWidth/aspect);
+          
+          canvas.css("width", nWidth);
+          canvas.css("height", nWidth/aspect);
+          
+          scaled = true;
+      }
+      
+      var size = 5;
+      
+      if(urlParameters["size"]) {
+          size = urlParameters["size"];
+          citybrand.fontSize = size;
+          scaled = true
+      }
+
+      var showProgress = true;
+      var lockProgress = true;
+
+      if(urlParameters["showProgress"]) {
+          showProgress = parseBoolean(urlParameters["showProgress"]);
+          jQuery("#drawProgress").attr("checked", showProgress);
+      }
+
+      if(urlParameters["lockProgress"]) {
+          lockProgress = parseBoolean(urlParameters["lockProgress"]);
+          jQuery("#lockProgress").attr("checked", lockProgress);
+      }
+
+      citybrand.init(document.getElementById("canvasArea"), size, scaled, showProgress, lockProgress);
+      
+      var colors = citybrand.getColors();
+      $('#backgroundColor div').css('background-color', colors["bg"]);
+      $('#textColor div').css('background-color', colors["text"]);
+      $('#specialColor div').css('background-color', colors["special"]);
+      
+      var input = jQuery("#inputText");
+      
+      input.keyup(renderText);
+      input.change(renderText);
+      
+      input.val(citybrand.text);
+      
+      citybrand.updateText(citybrand.text);
+
+      jQuery("#drawProgress").change(function() {
+          citybrand.showProgress = this.checked;
+          citybrand.render();
+      });
+
+      jQuery("#lockProgress").change(function() {
+          citybrand.lockProgress = this.checked;
+          citybrand.render();
+      });
+
+      $('#backgroundColor').ColorPicker({
+          color: rgbToHex(colors["bg"]),
+          onShow: function (colpkr) {
+              $(colpkr).fadeIn(500);
+              return false;
+          },
+          onHide: function (colpkr) {
+              $(colpkr).fadeOut(500);
+              return false;
+          },
+          onChange: function (hsb, hex, rgb) {
+              $('#backgroundColor div').css('background-color', '#' + hex);
+              citybrand.updateColors($('#backgroundColor div').css('background-color'), $('#textColor div').css('background-color'), $('#specialColor div').css('background-color'));
+              checkContrast();
+          }
+      });
+      
+      $('#textColor').ColorPicker({
+          color: rgbToHex(colors["text"]),
+          onShow: function (colpkr) {
+              $(colpkr).fadeIn(500);
+              return false;
+          },
+          onHide: function (colpkr) {
+              $(colpkr).fadeOut(500);
+              return false;
+          },
+          onChange: function (hsb, hex, rgb) {
+              $('#textColor div').css('background-color', '#' + hex);
+              citybrand.updateColors($('#backgroundColor div').css('background-color'), $('#textColor div').css('background-color'), $('#specialColor div').css('background-color'));
+              checkContrast();
+          }
+      });
+
+      $('#specialColor').ColorPicker({
+          color: rgbToHex(colors["special"]),
+          onShow: function (colpkr) {
+              $(colpkr).fadeIn(500);
+              return false;
+          },
+          onHide: function (colpkr) {
+              $(colpkr).fadeOut(500);
+              return false;
+          },
+          onChange: function (hsb, hex, rgb) {
+              $('#specialColor div').css('background-color', '#' + hex);
+              citybrand.updateColors($('#backgroundColor div').css('background-color'), $('#textColor div').css('background-color'), $('#specialColor div').css('background-color'));
+              checkContrast();
+          }
+      });
+  });
+  
+  jQuery(window).load(function() {
+     renderText(); 
+  });
+  
+  function createImage() {
+      var imageData = citybrand.saveImage(jQuery("#scale").val());
+
+      var img = jQuery("<img src='"+imageData+"' /><br /><br />");
+
+      var resultDiv = jQuery("#result-image");
+      resultDiv.empty();
+      resultDiv.append(img);
+      img.hide();
+      img.fadeIn("slow");
+
+      jQuery("html, body").scrollTop(jQuery(document).height());
+      
+      var url = citybrand.createURL();
+      
+      var link = jQuery("<p>Del dit logo:<a href='"+url+"'>Brug dette link</a></p>");
+      
+      resultDiv.append(link);
+  }
+  
+  function renderText() {
+      citybrand.updateText(jQuery("#inputText").val());
+  }
+  
+  function parseBoolean(str) {
+    return /^true$/i.test(str);
+  }
+
+  var contrastThreshold = 185;
+
+  function checkContrast(bg, text, special) {
+      if(!bg) {
+          bg = citybrand.bgColor;
+          text = citybrand.textColor;
+          special = citybrand.specialColor;
+      }
+      
+      var bgToTextOk = checkDistance(bg, text, contrastThreshold);
+      var bgToSpecialOk = checkDistance(bg, special, contrastThreshold);
+      var textToSpecialOk = checkDistance(text, special, contrastThreshold);
+      
+      jQuery(".bgToText, .bgToSpecial, .specialToText").hide();
+      
+      if(!bgToTextOk) {
+          jQuery(".bgToText").show();
+      }
+      if(!bgToSpecialOk) {
+          jQuery(".bgToSpecial").show();
+      }
+      if(!textToSpecialOk) {
+          jQuery(".specialToText").show();
+      }
+  }
+  
+  function checkDistance(color1, color2, threshold) {
+      var c1 = jQuery.Color(color1);
+      var c2 = jQuery.Color(color2);
+      
+      var c1Array = new Array();
+      c1Array[0] = c1.red();
+      c1Array[1] = c1.green();
+      c1Array[2] = c1.blue();
+      c1Array[3] = 1;
+      
+      var lab1 = new Colour(Colour.LABA, c1Array);
+      
+      var c2Array = new Array();
+      c2Array[0] = c2.red();
+      c2Array[1] = c2.green();
+      c2Array[2] = c2.blue();
+      c2Array[3] = 1;
+      
+      var lab2 = new Colour(Colour.LABA, c2Array);
+      
+      var distance = lab1.distanceTo(lab2);
+      
+      return distance > threshold;
+  }
+  
+  function createRandomColor() {
+      var c = jQuery.Color("rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")");
+      return c;
+  }
+  
+  var goodColors = [
+      "rgb(247,148,30)",
+      "rgb(215,25,32)",
+      "rgb(236,0,140)",
+      "rgb(142,91,166)",
+      "rgb(128,28,125)",
+      "rgb(0,99,165)",
+      "rgb(0,191,223)",
+      "rgb(120,205,209)",
+      "rgb(28,183,141)",
+      "rgb(162,192,47)",
+      "rgb(203,219,42)",
+      "rgb(255,203,5)"
+  ]
+
+  var specialColors = [
+      "rgb(255, 255, 255)"
+  ]
+  
+  function findRandomColors() {
+      while(true) {
+          
+          var bg = jQuery.Color(goodColors[Math.floor(Math.random()*goodColors.length)]);
+          var color1 = jQuery.Color(goodColors[Math.floor(Math.random()*goodColors.length)]);
+          var color2 = jQuery.Color(specialColors[Math.floor(Math.random()*specialColors.length)]);
+          
+          if(checkRandomContrasts(bg, color1, color2)) {
+              
+              citybrand.updateColors(bg.toCSS(), color1.toCSS(), color2.toCSS());
+              
+              $('#backgroundColor').ColorPickerSetColor(""+bg.toRGB());
+              $('#textColor').ColorPickerSetColor(""+color1.toRGB());
+              $('#specialColor').ColorPickerSetColor(""+color2.toRGB());
+              
+              $('#backgroundColor div').css('background-color', bg.toCSS());
+              $('#textColor div').css('background-color', color1.toCSS());
+              $('#specialColor div').css('background-color', color2.toCSS());
+              
+              checkContrast();
+              
+              return;
+          }
+      }
+  }
+  
+  function checkRandomContrasts(bg, color1, color2) {
+      var threshold = contrastThreshold;
+      
+      var c1 = checkDistance(color1, color2, threshold);
+      var c2 = checkDistance(color1, bg, threshold);
+      var c3 = checkDistance(color2, bg, threshold);
+      
+      return c1 && c2 && c3;
+  }
+    
+</script>
 </body>
 </html>
