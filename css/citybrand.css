@@ -1,7 +1,10 @@
 div.brand-generator {
-    width: 700px;
     background: white;
     border: none;
+    margin: 0 auto;
+    padding: 14px;
+    width: 952px;
+    
     
     -webkit-box-shadow: none;
     -moz-box-shadow: none;

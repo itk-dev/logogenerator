@@ -10,7 +10,6 @@ textarea {
 }
 
 div.brand-generator {
-    width: 850px;
     background: #f3f3ff;
     border: 1px solid grey;
     font-family: HelveticaNeueW01-85Heav, Tahoma, sans-serif;
@@ -128,4 +127,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', end
 -webkit-box-shadow: 5px 5x 8px 1px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.5);
 box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+.aakbar {
+  width: 980px;
+  height: 73px;
+  margin: 0 auto 30px;
+}
+
+.aakbar .logo {
+  float: left;
+}
+
+.aakbar .citybrand {
+  float: right;
+}
+
+body {
+  margin: 0;
+  padding: 0 0 30px;
+  background: #efefef url("../images/aakbar-back.png") left top repeat-x;
 }
