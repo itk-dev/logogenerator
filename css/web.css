@@ -143,6 +143,19 @@ box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.5);
   float: right;
 }
 
+.aakbar a:link,
+.aakbar a:visited,
+.aakbar a:hover {
+  border: none;
+  text-decoration: none;
+}
+
+.icon:link img {
+  display: block;
+  text-decoration: none;
+  border: none;
+}
+
 body {
   margin: 0;
   padding: 0 0 30px;
