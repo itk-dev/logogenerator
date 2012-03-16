@@ -1,3 +1,14 @@
+/*
+The MIT License (MIT)
+Copyright (c) 2012 CAVI & Digital Urban Living, Aarhus University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 textarea {
     width: 693px;
     height: 110px;
@@ -10,6 +21,7 @@ textarea {
 }
 
 div.brand-generator {
+    width: 850px;
     background: #f3f3ff;
     border: 1px solid grey;
     font-family: HelveticaNeueW01-85Heav, Tahoma, sans-serif;
@@ -39,9 +51,11 @@ div.step .description {
     float: left;
     color: #000000;
     text-align: center;
-    width: 8em;
+    width: 7.5em;
     margin-top: -1.3em;
     margin-bottom: 1.3em;
+    margin-left: 0.5em;
+    margin-right: 1em;
 }
 div.step {
     clear: both;
@@ -51,11 +65,25 @@ div.step {
 }
 div.changeable-value {
     background: #eaeaea;
-    margin-left: 8em;
+    margin-left: 9.5em;
     width: 700px;
 }
-div#result-image {
+
+/*div#result-image {
     margin-left: 8em;
+}*/
+
+div#result-image p {
+    font-family: sans-serif;
+    margin-top: 0.2em;
+    padding-bottom: 0.2em;
+    margin-left: 2em;
+}
+
+div#result-image p a {
+    padding-left: 15px;
+    background: url("../images/Document/LinkArrow.gif") no-repeat 0px 3px;
+    text-decoration: underline;
 }
 
 div.colourtype {
@@ -68,6 +96,7 @@ div.colourtype {
 div.colourtype .name {
     background: #dadada;
     width: 10em;
+    margin-bottom: 0.5em;
 }
 
 .colorSelector {
@@ -127,6 +156,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', end
 -webkit-box-shadow: 5px 5x 8px 1px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.5);
 box-shadow: 5px 5px 8px 1px rgba(0, 0, 0, 0.5);
+}
+
+footer#credits {
+    color: #888888;
+    font-style: italic;
+    text-align: center;
+    font-size: 0.8em;
+    font-family: sans-serif;
+}
+
+div.brand-generator a {
+    color: black !important;
+    text-decoration: none;
+}
+
+div.brand-generator a:hover {
+    text-decoration: underline;
 }
 
 .aakbar {
