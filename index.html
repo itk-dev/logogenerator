@@ -112,18 +112,18 @@
             scaled = true
         }
 
-        var showProgress = true;
-        var lockProgress = true;
+        var showProgress = false;
+        var lockProgress = false;
 
-        if(urlParameters["showProgress"]) {
-            showProgress = parseBoolean(urlParameters["showProgress"]);
-            jQuery("#drawProgress").attr("checked", showProgress);
-        }
-
-        if(urlParameters["lockProgress"]) {
-            lockProgress = parseBoolean(urlParameters["lockProgress"]);
-            jQuery("#lockProgress").attr("checked", lockProgress);
-        }
+      //if(urlParameters["showProgress"]) {
+      //    showProgress = parseBoolean(urlParameters["showProgress"]);
+      //    jQuery("#drawProgress").attr("checked", showProgress);
+      //}
+      //
+      //if(urlParameters["lockProgress"]) {
+      //    lockProgress = parseBoolean(urlParameters["lockProgress"]);
+      //    jQuery("#lockProgress").attr("checked", lockProgress);
+      //}
 
         citybrand.init(document.getElementById("canvasArea"), size, scaled, showProgress, lockProgress);
         
