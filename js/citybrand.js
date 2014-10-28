@@ -95,7 +95,7 @@ citybrand.init = function(canvasElement, fontSize, scaled, showProgress, lockPro
         
     } else {
         this.loaded = false;
-        this.updateText("smile\nwith\nAarhus");
+        this.updateText("rethink\nwith\nAarhus");
         
         if(!scaled) {
             this.lines[0].x = 152;
